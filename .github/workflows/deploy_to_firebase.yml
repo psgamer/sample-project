@@ -11,6 +11,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16.15.0
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist # Use the correct artifact name
+          path: dist/project-sample # Use the correct path
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
