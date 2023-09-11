@@ -15,7 +15,7 @@ jobs:
           node-version: 16.15.0
       - run: npm ci
       - run: npm run build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: dist # This is the name of the artifact
-          path: dist/project-sample # This is the path to your build artifacts
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: dist # This is the name of the artifact
+#          path: dist/project-sample # This is the path to your build artifacts
