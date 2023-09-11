@@ -9,13 +9,9 @@ jobs:
   build_project:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-          uses: actions/setup-node@v3
-          with:
-            node-version: 16
-
-      - name: Install Dependencies & Build
-        run: npm ci && npm run build
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.0
+      - run: npm ci
+      - run: npm run build
