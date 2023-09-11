@@ -2,8 +2,9 @@ name: Manual Deployment to Firebase
 
 on:
   workflow_dispatch: #manual trigger
+
 jobs:
-  deploy:
+  deploy_to_firebase:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

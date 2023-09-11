@@ -1,18 +1,16 @@
-name: Deploy to Firebase Hosting on PR
+name: Build project
 
 on:
   push:
     branches:
       - master
+
 jobs:
-  build:
+  build_project:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
       - uses: actions/checkout@v3
 
-      - name: Install Dependencies
-      - run: npm ci
-
-      - name: Build
-      - run: npm run build
+      - name: Install Dependencies & Build
+      - run: npm ci && npm run build
