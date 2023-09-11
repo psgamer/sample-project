@@ -1,0 +1,128 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "project": [
+          "tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-base",
+        "airbnb-typescript/base",
+        "plugin:sonarjs/recommended",
+        "plugin:ngrx/recommended"
+      ],
+      "plugins": [
+        "optimize-regex",
+        "sonarjs",
+        "no-loops",
+        "ngrx"
+      ],
+      "rules": {
+        "indent": [
+          "error",
+          4,
+          {
+            "SwitchCase": 1,
+            "VariableDeclarator": 1
+          }
+        ],
+        "@typescript-eslint/indent": [
+          "error",
+          4,
+          {
+            "SwitchCase": 1,
+            "VariableDeclarator": 1
+          }
+        ],
+        "linebreak-style": "off",
+        "max-len": [
+          "error",
+          {
+            "code": 140,
+            "ignoreRegExpLiterals": true
+          }
+        ],
+        "import/prefer-default-export": "off",
+        "no-unused-vars": "warn",
+        "optimize-regex/optimize-regex": "warn",
+        "sonarjs/cognitive-complexity": [
+          "error",
+          30
+        ],
+        "no-loops/no-loops": "error",
+        "import/first": "error",
+        "no-multiple-empty-lines": "off",
+        "spaced-comment": "off",
+        "no-multi-spaces": [
+          "error",
+          {
+            "ignoreEOLComments": true
+          }
+        ],
+        "prefer-destructuring": [
+          "error",
+          {
+            "object": true,
+            "array": false
+          }
+        ],
+        "@typescript-eslint/lines-between-class-members": "off",
+        "object-curly-newline": [
+          "error",
+          {
+            "ObjectExpression": {
+              "multiline": true,
+              "minProperties": 10,
+              "consistent": true
+            },
+            "ObjectPattern": {
+              "multiline": true,
+              "minProperties": 10,
+              "consistent": true
+            },
+            "ImportDeclaration": {
+              "multiline": true,
+              "minProperties": 10,
+              "consistent": true
+            },
+            "ExportDeclaration": {
+              "multiline": true,
+              "minProperties": 10,
+              "consistent": true
+            }
+          }
+        ],
+        "prefer-promise-reject-errors": "off"
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/template/eqeqeq": [
+          "error",
+          {
+            "allowNullOrUndefined": true
+          }
+        ]
+      }
+    }
+  ]
+}
