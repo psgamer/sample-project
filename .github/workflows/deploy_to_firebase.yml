@@ -1,4 +1,4 @@
-name: Manual Deployment to Firebase
+name: Manual Deployment to Firebase 2
 
 on:
   workflow_dispatch: #manual trigger
@@ -9,8 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      with:
-        node-version: 16.15.0
+        with:
+          node-version: 16.15.0
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
