@@ -1,0 +1,44 @@
+name: Build and deploy to firebase staging channel
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy manually'
+        required: false
+
+jobs:
+  build_project:
+    if: github.event_name == 'push'  # Only run on push to main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.0
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist # This is the name of the artifact
+          path: dist/project-sample # This is the path to your build artifacts
+  deploy_to_firebase:
+    if: github.event.inputs.deploy == 'true'  # Only run when manually triggered
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.0
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist # Use the correct artifact name
+          path: dist/project-sample # Use the correct path
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_SAMPLE_8E517 }}
+          projectId: project-sample-8e517
+          channelId: staging
