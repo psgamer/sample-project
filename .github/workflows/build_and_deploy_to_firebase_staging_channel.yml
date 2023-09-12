@@ -17,8 +17,8 @@ jobs:
       - run: npm run build
       - uses: actions/upload-artifact@v3
         with:
-          name: dist # This is the name of the artifact
-          path: dist/project-sample # This is the path to your build artifacts
+          name: dist
+          path: dist
   deploy_to_firebase:
     needs: build_project
     environment: staging
@@ -27,9 +27,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16.15.0
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: dist
+          path: dist
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
