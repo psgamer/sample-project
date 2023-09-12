@@ -5,10 +5,6 @@ on:
     branches:
       - master
   workflow_dispatch:
-    inputs:
-      deploy:
-        description: 'Deploy manually'
-        required: false
 
 jobs:
   build_project:
@@ -26,7 +22,7 @@ jobs:
           name: dist # This is the name of the artifact
           path: dist/project-sample # This is the path to your build artifacts
   deploy_to_firebase:
-    if: github.event.inputs.deploy == 'true'  # Only run when manually triggered
+    if: github.event_name == 'workflow_dispatch'  # Only run when manually triggered
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v3
