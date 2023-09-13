@@ -2,8 +2,6 @@ name: (staging) Build and deploy to firebase project
 
 on:
   workflow_dispatch:
-    branches:
-      - staging
     inputs:
       services:
         name: Services to deploy
