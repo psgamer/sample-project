@@ -1,4 +1,4 @@
-name: Build and deploy to firebase staging channel
+name: Build and Deploy reusable
 
 on:
   workflow_call:
