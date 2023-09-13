@@ -1,10 +1,24 @@
 name: Build and deploy to firebase staging channel
 
 on:
-  push:
-    branches:
-      - staging
-# TODO refactor to use reusable job
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      envConfigName:
+        required: true
+        type: string
+      projectId:
+        required: true
+        type: string
+      channelId:
+        required: true
+        type: string
+    secrets:
+      firebaseServiceAccount:
+        required: true
+
 jobs:
   build_project:
     runs-on: ubuntu-latest
@@ -14,14 +28,14 @@ jobs:
         with:
           node-version: 16.15.0
       - run: npm ci
-      - run: npm run build
+      - run: npm run build --configuration ${{ inputs.envConfigName }}
       - uses: actions/upload-artifact@v3
         with:
           name: dist
           path: dist
-  deploy_preview_channel_staging:
+  deploy_preview_channel:
     needs: build_project
-    environment: staging
+    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v3
@@ -35,6 +49,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_SAMPLE_8E517 }}
-          projectId: project-sample-8e517
-          channelId: staging
+          firebaseServiceAccount: ${{ secrets.firebaseServiceAccount }}
+          projectId: ${{ inputs.projectId }}
+          channelId: ${{ inputs.channelId }}

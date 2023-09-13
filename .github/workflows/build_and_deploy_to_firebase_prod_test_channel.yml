@@ -1,0 +1,49 @@
+name: Build and deploy to firebase prod-test channel
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_deploy:
+    uses: psgamer/sample-project/.github/workflows/build_and_deploy_to_firebase_channel_base.yml@master
+    with:
+      environment: production
+      envConfigName: production
+      projectId: project-sample-prod
+      channelId: prod-test
+    sercrets:
+      firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_SAMPLE_PROD }}
+#  build_project:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: 16.15.0
+#      - run: npm ci
+#      - run: npm run build
+#      - uses: actions/upload-artifact@v3
+#        with:
+#          name: dist
+#          path: dist
+#  deploy_preview_channel_prod:
+#    needs: build_project
+#    environment: production
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: 16.15.0
+#      - uses: actions/checkout@v3
+#      - uses: actions/download-artifact@v3
+#        with:
+#          name: dist
+#          path: dist
+#      - uses: FirebaseExtended/action-hosting-deploy@v0
+#        with:
+#          repoToken: ${{ secrets.GITHUB_TOKEN }}
+#          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_SAMPLE_PROD }}
+#          projectId: project-sample-prod
+#          channelId: prod-test
