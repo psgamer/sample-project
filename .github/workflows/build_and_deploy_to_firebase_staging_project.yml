@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       services:
-        name: Services to deploy
-        description: comma separated, for example "hosting,storage,firestore,database,functions"
+        description: Services to deploy (comma separated, for example "hosting,storage,firestore,database,functions")
         required: true
         type: string
 
