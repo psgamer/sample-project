@@ -4,37 +4,14 @@ on:
   push:
     branches:
       - staging
-# TODO refactor to use reusable job
+
 jobs:
-  build_project:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16.15.0
-      - run: npm ci
-      - run: npm run build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: dist
-          path: dist
-  deploy_preview_channel_staging:
-    needs: build_project
-    environment: staging
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16.15.0
-      - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
-        with:
-          name: dist
-          path: dist
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_SAMPLE_8E517 }}
-          projectId: project-sample-8e517
-          channelId: staging
+  build_and_deploy:
+    uses: psgamer/sample-project/.github/workflows/build_and_deploy_to_firebase_channel_base.yml@staging
+    with:
+      environment: staging
+      build_env_command: build_staging
+      projectId: project-sample-8e517
+      channelId: staging
+    secrets:
+      firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_SAMPLE_8E517 }}
