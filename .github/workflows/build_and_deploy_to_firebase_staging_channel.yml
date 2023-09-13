@@ -1,4 +1,4 @@
-name: Build and deploy to firebase staging channel
+name: (staging) Build and deploy to firebase channel
 
 on:
   push:

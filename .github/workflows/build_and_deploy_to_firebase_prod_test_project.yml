@@ -1,0 +1,22 @@
+name: (prod-test) Build and deploy to firebase project
+
+on:
+  workflow_dispatch:
+    branches:
+      - master
+    inputs:
+      services:
+        name: Services to deploy
+        description: comma separated, for example "hosting,storage,firestore,database,functions"
+        required: true
+        type: string
+
+jobs:
+  build_and_deploy:
+    uses: psgamer/sample-project/.github/workflows/build_and_deploy_to_firebase_project_base.yml@staging
+    with:
+      services: ${{ inputs.services }}
+      environment: production
+      build_env_command: build_prod
+      project: project-sample-prod
+    secrets: inherit

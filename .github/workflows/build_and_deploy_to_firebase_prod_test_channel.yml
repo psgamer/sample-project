@@ -1,4 +1,4 @@
-name: Build and deploy to firebase prod-test channel
+name: (prod-test) Build and deploy to firebase channel
 
 on:
   push:

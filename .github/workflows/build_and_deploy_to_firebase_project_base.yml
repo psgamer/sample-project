@@ -1,0 +1,31 @@
+name: (base) Build and Deploy to Firebase project
+
+on:
+  workflow_call:
+    inputs:
+      services:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+      build_env_command:
+        required: true
+        type: string
+      project:
+        required: true
+        type: string
+
+jobs:
+  build_and_deploy:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.0
+      - uses: actions/checkout@v3
+      - run: npm ci
+      - run: npm run ${{ inputs.build_env_command }}
+      - run: npm i firebase-tools
+      - run: firebase deploy --token ${{ secrets.FIREBASE_CI_TOKEN }} --only ${{ inputs.services }} --project ${{ inputs.project }}
