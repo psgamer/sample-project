@@ -13,7 +13,7 @@ jobs:
       envConfigName: production
       projectId: project-sample-prod
       channelId: prod-test
-    sercrets:
+    secrets:
       firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_SAMPLE_PROD }}
 #  build_project:
 #    runs-on: ubuntu-latest
