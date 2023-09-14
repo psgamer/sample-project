@@ -34,7 +34,10 @@
               "src/styles.scss",
               "node_modules/firebaseui/dist/firebaseui.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "dialog-polyfill"
+            ]
           },
           "configurations": {
             "production": {
@@ -71,6 +74,8 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+          },
           "configurations": {
             "production": {
               "browserTarget": "project-sample:build:production"
@@ -86,9 +91,22 @@
           "options": {
             "browserTarget": "project-sample:build"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "project-sample"
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
+  }
 }
