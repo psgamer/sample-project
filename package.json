@@ -4,7 +4,7 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
-    "build_staging": "ng build --configuration development",
+    "build_staging": "ng build --configuration staging",
     "build_prod": "ng build --configuration production",
     "emulators": "firebase emulators:start",
     "lint": "ng lint"
