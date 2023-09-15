@@ -36,6 +36,10 @@ export class AppComponent {
         private app: FirebaseApp,
         private database: Database,
     ) {
+
+        //
+
+        //
         // this.clearWorkers();
 
         // setTimeout(() => {
