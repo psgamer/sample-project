@@ -25,6 +25,8 @@ export class AppComponent {
             () => obs.complete());
     }).pipe(map(u => !u));
 
+
+
     constructor(
         private firestore: Firestore,
         private functions: Functions,
